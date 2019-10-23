@@ -2,9 +2,14 @@
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
-<body>
-    <div ng-app="myApp" ng-controller="myCtrl">
+<body ng-app="myApp">
+    <div ng-controller="myCtrl">
         <h1 ng-click="changeName(toggle)">{{firstname[toggle]}}</h1>
+    </div>
+    <div ng-controller="namesController">
+        <div ng-repeat="person in names">
+            {{ person }}
+        </div>
     </div>
     <script>
         var app = angular.module('myApp', []);
@@ -17,6 +22,13 @@
             $scope.changeName = function () {
                 $scope.toggle = !$scope.toggle & 1
             }
+        });
+        angular.module('myApp').controller('namesController', function($scope) {
+            $scope.names = [
+                {name:'Jani',country:'Norway'},
+                {name:'Hege',country:'Sweden'},
+                {name:'Kai',country:'Denmark'}
+            ];
         });
     </script>
 </body>
