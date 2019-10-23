@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <h1 ng-click="changeName(toggle)">{{firstname[toggle]}}</h1>
+    </div>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.toggle = 0;
+            $scope.firstname = {
+                0: 'Neil',
+                1: 'John'
+            }
+            $scope.changeName = function () {
+                $scope.toggle = !$scope.toggle & 1
+            }
+        });
+    </script>
+</body>
+
+</html>

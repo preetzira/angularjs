@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>  
+    <title>Data Binding Angular</title>
+</head>
+<body>
+    <!-- <div ng-app="" ng-init="name=''">
+        <div>
+            Input your name: <input type="text" ng-model="name"><br ng-if="!name.length"><br ng-if="!name.length">
+            <p ng-if="name.length">Hello {{name}}</p>
+        </div>
+    </div> -->
+    <div data-ng-app="" data-ng-init="weight='';height=''">
+        Enter weight in KG: <input type="number" ng-model="weight"><br /><br />
+        Enter Height in CM: <input type="number" ng-model="height"><br /><br />
+        Your BMI is {{ weight / (height * height)*10000 }}
+    </div>
+</body>
+</html>
