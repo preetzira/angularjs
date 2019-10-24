@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Angular select</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>  
+</head>
+<body>
+    <div ng-app="selectApp">
+        <div ng-controller="selectController">
+            <select ng-model="selectedOption" ng-options="user for user in data" ng-change="handleChange()"></select>
+            <select ng-model="selectedOption" ng-change="handleChange()">
+                <option ng-repeat="user in data">{{user}}</option>
+            </select>
+        </div>
+        <p>Disclaimer: Here two select are used <br /><br />
+            first one is using <b>"ng-options="user for user in data"</b> on select element <br />
+            second one is using <b>ng-repeat="user in data"</b> on options element with {{user}} as child
+        </p>
+
+
+
+        <div ng-controller="complexSelectController">
+            <p>Select a car:</p>
+
+            <select ng-model="selectedCar" ng-options="key for (key, value) in nestedCars">
+            </select>
+    
+            <p>You selected: {{selectedCar.brand}}</p>
+            <p>Model: {{selectedCar.model}}</p>
+            <p>Color: {{selectedCar.color}}</p>
+
+
+            <select ng-model="selectedCarModel" ng-options="value.model for (key, value) in nestedCars">
+            </select>
+
+            <p>You selected: {{selectedCarModel.brand}}</p>
+            <p>Model: {{selectedCarModel.model}}</p>
+            <p>Color: {{selectedCarModel.color}}</p>
+
+            <select ng-model="selectedCarOption">
+                <option ng-repeat="car in cars" value="{{car.brand}}">{{car.model}}</option>
+            </select>
+            <p>Brand of selected car {{selectedCarOption}}</p>
+
+
+            <br /><br />
+            <p>Disclaimer: Here three select are used <br /><br />
+                first one is using <b>ng-options="key for (key, value) in nestedCars"</b> on select element <br />
+                Second one is using <b>ng-options="value.model for (key, value) in nestedCars"</b> on select element <br />
+                last one is using <b> ng-repeat="car in cars" value="{{car.brand}}"</b> on options element with {{car.model}} as child
+            </p>
+        </div>
+    </div>
+    <script>
+        angular.module('selectApp',[])
+            .controller('selectController',function($scope){
+                $scope.data = ["Gib", "Som", "Tom", "Pattrick", "Dee", "Fay"]
+                $scope.selectedOption="Som"
+                $scope.handleChange = function(){console.log($scope.selectedOption)}
+            })
+            .controller('complexSelectController',function($scope){
+                $scope.nestedCars = {
+                    car01 : {brand : "Ford", model : "Mustang", color : "red"},
+                    car02 : {brand : "Fiat", model : "500", color : "white"},
+                    car03 : {brand : "Volvo", model : "XC90", color : "black"}
+                }
+                $scope.cars = [
+                    {brand : "Ford", model : "Mustang", color : "red"},
+                    {brand : "Fiat", model : "500", color : "white"},
+                    {brand : "Volvo", model : "XC90", color : "black"}
+                ];
+                $scope.selectedCar = $scope.nestedCars.car01
+                $scope.selectedCarModel = $scope.nestedCars.car01
+                $scope.selectedCarOption = $scope.cars[2].brand
+            })
+    </script>
+    <hr />
+                                                                        <pre>
+                                                                            <strong>Code is below: </strong>
+                                                                            angular.module('selectApp',[])
+                                                                                .controller('selectController',function($scope){
+                                                                                    $scope.data = ["Gib", "Som", "Tom", "Pattrick", "Dee", "Fay"]
+                                                                                    $scope.selectedOption="Som"
+                                                                                    $scope.handleChange = function(){console.log($scope.selectedOption)}
+                                                                                })
+
+                                                                                .controller('complexSelectController',function($scope){
+                                                                                    $scope.nestedCars = {
+                                                                                        car01 : {brand : "Ford", model : "Mustang", color : "red"},
+                                                                                        car02 : {brand : "Fiat", model : "500", color : "white"},
+                                                                                        car03 : {brand : "Volvo", model : "XC90", color : "black"}
+                                                                                    }
+                                                                                    $scope.cars = [
+                                                                                        {brand : "Ford", model : "Mustang", color : "red"},
+                                                                                        {brand : "Fiat", model : "500", color : "white"},
+                                                                                        {brand : "Volvo", model : "XC90", color : "black"}
+                                                                                    ];
+                                                                                    $scope.selectedCar = $scope.nestedCars.car01
+                                                                                    $scope.selectedCarModel = $scope.nestedCars.car01
+                                                                                    $scope.selectedCarOption = $scope.cars[2].brand
+                                                                                })
+                                                                        </pre>
+</body>
+</html>

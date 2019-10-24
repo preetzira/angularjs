@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <title>Services</title>
+</head>
+<body>
+    <div ng-app="servicesApp">
+        <div ng-controller="serviceController">
+            {{builtIn}}
+            <br />
+            <hr />
+            <br />
+            {{custom}}
+        </div>
+    </div>
+    <script>
+        let app = angular.module('servicesApp',[])
+        app.service('customFetch',function(){
+            this.get = function(url){
+                return fetch(url)
+                    .then(response => response.json())
+            }   
+        })
+        app.controller('serviceController',function($scope,$http,customFetch){
+            $http.get('https://jsonplaceholder.typicode.com/todos/')
+                                    .then(response=>($scope.builtIn = response.data))
+            customFetch.get('https://jsonplaceholder.typicode.com/todos/')
+                                .then(json=> ($scope.custom = json))
+        })
+    </script>
+        <hr />
+                                                                                <pre>
+                                                                                    <strong>Code is below: </strong>
+                                                                                    <i>
+                                                                                        let app = angular.module('servicesApp',[])
+                                                                                        app.service('customFetch',function(){
+                                                                                            this.get = function(url){
+                                                                                                return fetch(url)
+                                                                                                    .then(response => response.json())
+                                                                                            }   
+                                                                                        })
+                                                                                        app.controller('serviceController',function($scope,$http,customFetch){
+                                                                                            $http.get('https://jsonplaceholder.typicode.com/todos/')
+                                                                                                                    .then(response=>($scope.builtIn = response.data))
+                                                                                            customFetch.get('https://jsonplaceholder.typicode.com/todos/')
+                                                                                                                .then(json=> ($scope.custom = json))
+                                                                                        })
+                                                                                    </i>
+                                                                                </pre>
+</body>
+</html>

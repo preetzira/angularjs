@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Filter dropdown</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<style>
+*{
+    box-sizing: border-box;
+}
+.wrapper > * {
+    margin: 10px auto;
+}
+.wrapper{
+    margin: 50px auto 0px;
+    position: relative;
+}
+.wrapper > input {
+    height: 40px;
+    max-width: 250px;
+    border-radius: 2px;
+    border: 1px solid #e0e0e0;
+    padding: 10px 20px;
+    display:block;
+}
+input:focus{
+    box-shadow: 0px 0px 0px 3.5px rgba(45, 210, 247, 0.2);
+    outline: none;
+    border-color: rgb(45, 210, 247);
+}
+/* .wrapper > ul {
+    position: absolute;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    max-height: 150px;
+    margin: 0;
+    overflow: auto;
+    border: 1px solid #e0e0e0;
+    border-top:none;
+}
+ul > li {
+    padding: 5px;
+    border-top: 1px solid #e0e0e0;
+} */
+table{
+    width: 60%;
+    border-collapse: collapse;
+}
+th,td{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+th{
+    text-align: center;
+    cursor: pointer;
+}
+td:nth-child(1){
+    width: 10px;
+    text-align: center;
+}
+td:nth-child(2){
+    width: 200px;
+}
+td:nth-child(3){
+    width: 50px;
+    text-align: center;
+}
+tr:nth-child(even){
+    background: #dddddd;
+}
+</style>
+</head>
+<body>
+    <div ng-app="filterApp" ng-init="search='';data=[];">
+        <div ng-controller="filter" class="wrapper">
+            <input type="text" ng-model="search" placeholder="Type here to search...">
+            <!-- <ul ng-if="search.length" class="drop-down">
+                <li ng-repeat="x in data | filter : search">
+                    <tr>
+                        <td>{{x.title}}</td>
+                    </tr>
+                </li>
+            </ul> -->
+            <table>
+                <thead>
+                    <tr>
+                        <th title="click here to sort" ng-click="sortBy('id')">Id</th>
+                        <th title="click here to sort" ng-click="sortBy('title')">Title</th>
+                        <th title="click here to sort" ng-click="sortBy('completed')">Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-if="data.length && search.length" ng-repeat="x in data | filter : search | orderBy : sort">
+                        <td>{{x.id}}</td>
+                        <td>{{x.title}}</td>
+                        <td>{{x.completed}}</td>
+                    </tr>
+                    <tr ng-if="!data.length || !search.length"><td></td><td style="text-align: center;font-style: italic;color:red;">Click over the header fields or search to populate data</td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        angular.module('filterApp',[])
+            .controller('filter',function($scope){
+                fetch('https://jsonplaceholder.typicode.com/todos/')
+                .then(response => response.json())
+                .then(json =>($scope.data = json))
+                $scope.search = ""
+                $scope.sort = ""
+                $scope.sortBy = function(sort){
+                    $scope.sort = sort
+                }
+            })
+    </script>
+    <hr />
+                                                                <pre>
+                                                                    <strong>Code is below: </strong>
+                                                                    <i>
+                                                                            angular.module('filterApp',[])
+                                                                                .controller('filter',function($scope){
+                                                                                    fetch('https://jsonplaceholder.typicode.com/todos/')
+                                                                                    .then(response => response.json())
+                                                                                    .then(json =>($scope.data = json))
+                                                                                    $scope.search = ""
+                                                                                    $scope.sort = ""
+                                                                                    $scope.sortBy = function(sort){
+                                                                                        $scope.sort = sort
+                                                                                    }
+                                                                                })
+                                                                    </i>
+                                                                </pre>
+
+</body>
+</html>
