@@ -31,6 +31,30 @@
             ];
         });
     </script>
+    <hr />
+                                                            <pre>
+                                                                <strong>Code is below: </strong>
+                                                                <i>
+                                                                        var app = angular.module('myApp', []);
+                                                                        app.controller('myCtrl', function ($scope) {
+                                                                            $scope.toggle = 0;
+                                                                            $scope.firstname = {
+                                                                                0: 'Neil',
+                                                                                1: 'John'
+                                                                            }
+                                                                            $scope.changeName = function () {
+                                                                                $scope.toggle = !$scope.toggle & 1
+                                                                            }
+                                                                        });
+                                                                        angular.module('myApp').controller('namesController', function($scope) {
+                                                                            $scope.names = [
+                                                                                {name:'Jani',country:'Norway'},
+                                                                                {name:'Hege',country:'Sweden'},
+                                                                                {name:'Kai',country:'Denmark'}
+                                                                            ];
+                                                                        });
+                                                                </i>
+                                                            </pre>
 </body>
 
 </html>
