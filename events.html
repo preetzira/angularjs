@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Angular events</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="app" ng-init="count=0;">
+        <div ng-controller="appController">
+            <button ng-click="count = count-1 > 0 ? count-1 : null">-</button>
+            <input type="text" ng-readonly="true" ng-value="count" onfocus="this.blur()">
+            <button ng-click="count = count+1">+</button>
+            <p ng-if="count && count>=0">Counter value is : {{count}}</p>
+            <p ng-if="count === null" style="color: red;" ng-mousemove="count = count + 1">Counter can't be less than zero</p>
+            <h1 ng-mousemove="count = count + 1">Mouse over me!</h1>
+            <h2>{{ count }}</h2>
+        </div>
+    </div>
+<script>
+    angular.module('app',[])
+        .controller('appController',function($scope){
+            $scope.count = 0
+        })
+</script>
+</body>
+</html>
